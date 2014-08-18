@@ -9,7 +9,12 @@ project(sample-simbody-client)
 # This depends on SimbodyConfig.cmake being located somewhere predictable
 # on your machine. If you have installed it somewhere that CMake won't be
 # able to guess, you'll need to tell find_package where to look.
-find_package(Simbody 3.4 REQUIRED)
+find_package(Simbody REQUIRED)
+
+if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU" OR
+        "${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+endif()
 
 include_directories(${Simbody_INCLUDE_DIR})
 link_directories(${Simbody_LIB_DIR})
